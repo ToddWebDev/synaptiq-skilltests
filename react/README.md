@@ -8,17 +8,17 @@
 
 ### Storybook
 
-Run `npm run storybook`
+Run `yarn storybook`
 Learn about the date picker component and it's props and use-cases.
 
 ### App
 
-Run `npm run dev` and go to 'http://localhost:3000/date-pickers'
+Run `yarn dev` and go to 'http://localhost:3000/date-pickers'
 Interact with the date picker component as a 'Start Date'.
 
 ### Unit Tests
 
-Run `npm run test`
+Run `yarn test`
 Verify unit tests pass successfully. Verify unit tests are aligned with desired functionality.
 
 ### Description
