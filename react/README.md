@@ -1,24 +1,39 @@
 # Synaptiq React Skills Test
 
-## Your mission
+## Date Picker
 
-Create a new "combined date" control as described in the shopify polaris "patterns"
-documentation at https://polaris.shopify.com/patterns/date-picking/single-date
+### Submitted by Todd Rizzolo on August 8, 2023
 
-- You should build off the framework and tools in this repo, namely:
-  - yarn
-  - storybook
-  - next.js
-  - react
-  - tailwind.css
-  - typescript
-- You may pick any of the patterns described (single-date, date range or date list)
-- You should include your component in a sample next.js page added to this project
-- Your example page can do anything you want, so show off what it can do!
-- Your component should be added to the storybook in this project
-- Your component should be tested and demonstrate your command of css, html and react
-- Your should add (and document) the commands used to run your tests
-- Your component should meet the usability guidelines from polaris
-- You should update this readme explaining what usability features and capabilities you have implemented
-- You should fork this repository and open a pull request against it with your changes.
-- You should be prepared to discuss your changes in detail and explain why they are great.
+## Instructions
+
+### Storybook
+
+Run `npm run storybook`
+Learn about the date picker component and it's props and use-cases.
+
+### App
+
+Run `npm run dev` and go to 'http://localhost:3000/date-pickers'
+Interact with the date picker component as a 'Start Date'.
+
+### Unit Tests
+
+Run `npm run test`
+Verify unit tests pass successfully. Verify unit tests are aligned with desired functionality.
+
+### Description
+
+The date picker component is implemented with the shopify polaris UI library and is built with accessibility in mind. It is built to be responsive.
+
+It uses semantic html elements along with aria roles and labels so that it can be described by screen readers. When the calendar is focused, it is able to be navigated with the keyboard arrows and the enter/return key selects the highlighted date. It is configurable with custom props to meet a variety of use-cases.
+
+The date picker component follows existing component and story implementation patterns for html, css and js. It is mobile-first in implementation.
+
+## Future Enhancements
+
+- Add date range variant
+- Add date list variant
+- Make text field editable
+- Additional date formats support
+- Consider time zones and edge-cases
+- Consider date format localization
