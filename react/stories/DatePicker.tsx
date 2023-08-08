@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import {
   AppProvider,
-  Box,
   Popover,
   Card,
   DatePicker,
@@ -10,13 +9,19 @@ import {
 } from '@shopify/polaris'
 import enTranslations from '@shopify/polaris/locales/en.json'
 import { CalendarMinor } from '@shopify/polaris-icons'
+import { Button } from './Button'
 import '@shopify/polaris/build/esm/styles.css'
+import './datepicker.css'
 
 interface SingleDatePickerProps {
   /**
    * Date Input Label
    */
   label: string
+  /**
+   * Date Format
+   */
+  dateFormat?: 'short' | 'long'
   /**
    * Disable Dates Before
    */
@@ -38,6 +43,7 @@ type SelectedDate = {
 
 export default function SingleDatePicker({
   label,
+  dateFormat = 'short',
   disableDatesBefore,
   disableDatesAfter,
   onChange,
@@ -48,7 +54,20 @@ export default function SingleDatePicker({
     month: selectedDate.getMonth(),
     year: selectedDate.getFullYear(),
   })
-  const formattedValue = selectedDate.toISOString().slice(0, 10)
+
+  // Set up date format options
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: dateFormat === 'long' ? 'long' : undefined,
+    year: 'numeric',
+    month: dateFormat === 'long' ? 'long' : 'short',
+    day: 'numeric',
+  }
+  const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat(
+    'en-US',
+    options
+  )
+
+  const formattedValue: string = formatter.format(selectedDate)
   const datePickerRef = useRef(null)
 
   function handleInputValueChange() {
@@ -79,8 +98,9 @@ export default function SingleDatePicker({
   return (
     // Wrap in AppProvider for storybook implementation
     <AppProvider i18n={enTranslations}>
-      <Box maxWidth='330px'>
+      <div className='datepicker-container'>
         <Popover
+          aria-expanded={visible}
           active={visible}
           autofocusTarget='none'
           preferredAlignment='left'
@@ -90,31 +110,42 @@ export default function SingleDatePicker({
           preventCloseOnChildOverlayClick
           onClose={handleOnClose}
           activator={
-            <TextField
-              id='date-input'
-              label={label}
-              prefix={<Icon source={CalendarMinor} />}
-              value={formattedValue}
-              onFocus={() => setVisible(true)}
-              onChange={handleInputValueChange}
-              autoComplete='off'
-            />
+            <div className='datepicker-activator'>
+              <TextField
+                readOnly
+                role='combobox'
+                id='date-input'
+                label={label}
+                prefix={<Icon source={CalendarMinor} />}
+                value={formattedValue}
+                onFocus={() => setVisible(true)}
+                onChange={handleInputValueChange}
+                autoComplete='off'
+              />
+              <Button
+                primary
+                size='medium'
+                label={`Select ${label}`}
+                onClick={() => setVisible(true)}
+              />
+            </div>
           }
         >
-          <div ref={datePickerRef}></div>
-          <Card>
-            <DatePicker
-              month={month}
-              year={year}
-              selected={selectedDate}
-              onMonthChange={handleMonthChange}
-              onChange={handleDateSelection}
-              disableDatesBefore={disableDatesBefore}
-              disableDatesAfter={disableDatesAfter}
-            />
-          </Card>
+          <div ref={datePickerRef} role='list'>
+            <Card>
+              <DatePicker
+                month={month}
+                year={year}
+                selected={selectedDate}
+                onMonthChange={handleMonthChange}
+                onChange={handleDateSelection}
+                disableDatesBefore={disableDatesBefore}
+                disableDatesAfter={disableDatesAfter}
+              />
+            </Card>
+          </div>
         </Popover>
-      </Box>
+      </div>
     </AppProvider>
   )
 }

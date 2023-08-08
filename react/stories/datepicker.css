@@ -1,0 +1,19 @@
+.datepicker-container {
+  margin: 24px;
+}
+
+.datepicker-activator {
+  display: flex;
+  flex-direction: column;
+}
+
+.datepicker-activator button {
+  margin-top: 8px;
+}
+
+@media screen and (min-width: 600px) {
+  .datepicker-container {
+    margin: 0;
+    max-width: 320px;
+  }
+}

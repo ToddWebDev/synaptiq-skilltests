@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { Page } from '@shopify/polaris'
-import SingleDatePicker from '../components/SingleDatePicker'
+import SingleDatePicker from '../../stories/DatePicker'
 
 export default function DatePickers() {
   return (

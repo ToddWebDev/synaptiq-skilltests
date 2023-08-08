@@ -1,13 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import SingleDatePicker from '../app/components/SingleDatePicker'
+import SingleDatePicker from './DatePicker'
 
 const meta = {
   title: 'Example/DatePicker',
   component: SingleDatePicker,
-  parameters: {
-    // More on how to position stories at: https://storybook.js.org/docs/react/configure/story-layout
-    layout: 'fullscreen',
-  },
 } satisfies Meta<typeof SingleDatePicker>
 
 export default meta
@@ -23,16 +19,23 @@ export const DatePicker: Story = {
   },
 }
 
+export const DateFormat: Story = {
+  args: {
+    label: 'Date',
+    dateFormat: 'long',
+  },
+}
+
 export const DisabledDatesBefore: Story = {
   args: {
-    label: 'Start Date',
+    label: 'Date',
     disableDatesBefore: today,
   },
 }
 
 export const DisabledDatesAfter: Story = {
   args: {
-    label: 'Start Date',
+    label: 'Date',
     disableDatesAfter: twoWeeksFromToday,
   },
 }
